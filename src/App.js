@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import data from './data.json';
+import { Col, Divider, Layout, List, Row } from 'antd';
+import { getBirthdayGuys } from './utils';
+
+const { Header, Footer, Content } = Layout;
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Layout>
+        <Header>Header</Header>
+        <Divider orientation="middle">PS Interactive</Divider>
+        <Content>
+            <Row gutter={[16, 30]}>
+              <Col span={6}>
+                <List
+                  size="small"
+                  header={<h2>List of all partners</h2>}
+                  footer={null}
+                  bordered
+                  dataSource={data.locations}
+                  renderItem={(item) => <List.Item>{item.name}</List.Item>}
+                />
+              </Col>
+              <Col span={10}>
+                <h3>Let's call any partner to celebrate their birthday in the our Sofia Office </h3>
+                <List
+                  size="small"
+                  header={null}
+                  footer={null}
+                  bordered
+                  dataSource={getBirthdayGuys()}
+                  renderItem={(item) => <List.Item>{item.name}</List.Item>}
+                />
+              </Col>
+            </Row>
+        </Content>
+        <Footer>Footer</Footer>
+      </Layout>
+    </>
   );
 }
 
